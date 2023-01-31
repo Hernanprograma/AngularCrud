@@ -1,14 +1,29 @@
 <div class="card">
   <h2>Login</h2>
-  <form>
+
+  <form (ngSubmit)="onSubmit()">
     <div class="form-group">
       <label for="email">Email</label>
-      <input type="text" id="email" class="form-control" />
+      <input
+        [(ngModel)]="login.email"
+        [ngModelOptions]="{ standalone: true }"
+        #email="ngModel"
+        type="text"
+        id="email"
+        class="form-control"
+      />
     </div>
     <div class="form-group">
-      <label for="password">Contraseña</label>
-      <input type="password" id="password" class="form-control" />
+      <label for="password">Password</label>
+      <input
+        [(ngModel)]="login.password"
+        [ngModelOptions]="{ standalone: true }"
+        #password="ngModel"
+        type="password"
+        id="password"
+        class="form-control"
+      />
     </div>
-    <button type="submit" class="btn btn-primary">Iniciar sesión</button>
+    <button type="submit" class="btn btn-primary">Login</button>
   </form>
 </div>

@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { LoginInterface, LoginResponse } from '../../interfaces/auth.interfaces';
 import { AuthService } from '../../services/auth.service';
+
+
 
 @Component({
   selector: 'auth-register',
@@ -8,7 +11,10 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent {
-  constructor(private authService: AuthService) { }
+  constructor(
+    private authService: AuthService,
+    private router: Router
+  ) { }
 
 
   public register: LoginInterface = {
@@ -18,10 +24,11 @@ export class RegisterComponent {
 
   public loginResponse!: LoginResponse;
 
-  public submit(): void {
-    this.authService.login(this.register).subscribe(loginData => {
+  public onSubmit(): void {
+    this.authService.register(this.register).subscribe(loginData => {
       this.loginResponse = loginData;
       console.log({ loginData });
+      this.router.navigate(['/'])
     });
   }
 
