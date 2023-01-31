@@ -22,5 +22,9 @@ export class UsersServiceService {
     return this.http.get<UserResponseById>(url);
   }
 
+  deleteUser(id: number): Observable<UserResponseById> {
+    const url: string = `${this.apiUrl}/users/${id}`;
+    return this.http.delete<UserResponseById>(url);
+  }
 
 }

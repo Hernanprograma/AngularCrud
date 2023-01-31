@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { User } from '../../interfaces/user.interface';
 import { UsersServiceService } from '../../services/users-service.service';
 
@@ -7,16 +8,27 @@ import { UsersServiceService } from '../../services/users-service.service';
   templateUrl: './user-card.component.html',
   styleUrls: ['./user-card.component.css']
 })
-export class UserCardComponent {
-  public user!: User;
-  constructor(private usersService: UsersServiceService) {
-    this.getUser(1);
+export class UserCardComponent implements OnInit {
+  public user: User = {
+    id: 0,
+    email: '',
+    first_name: '',
+    last_name: '',
+    avatar: ''
+  };
+  public id!: number;
+  constructor(private usersService: UsersServiceService, private route: ActivatedRoute,) {
+
+  }
+  ngOnInit(): void {
+    this.id = this.route.snapshot.params['id'];
+    this.getUser();
   }
 
-  public getUser(id: number): void {
-    this.usersService.getUser(1).subscribe(user => {
+  public getUser(): void {
+    this.usersService.getUser(this.id).subscribe(user => {
       this.user = user.data;
-      console.log(this.user);
+
     })
   }
 

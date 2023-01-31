@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { UserCardComponent } from './pages/user-card/user-card.component';
 import { UserListComponent } from './pages/user-list/user-list.component';
 import { SharedModule } from '../shared/shared.module';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -13,7 +14,8 @@ import { SharedModule } from '../shared/shared.module';
   ],
   imports: [
     CommonModule,
-    SharedModule
+    SharedModule,
+    RouterModule
   ],
   exports: [
     UserCardComponent,
