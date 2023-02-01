@@ -1,4 +1,4 @@
-body {
+/* body {
   margin: 0;
   padding: 0;
 }
@@ -11,4 +11,26 @@ main {
 section {
   padding: 20px;
   width: 100%;
+} */
+
+main {
+  display: flex;
+  font-family: Arial, sans-serif;
+}
+shared-sidebar {
+  width: 20%;
+  min-width: 200px;
+}
+section {
+  width: 80%;
+  padding: 10px;
+  box-sizing: border-box;
+}
+@media (max-width: 768px) {
+  shared-sidebar {
+    display: none;
+  }
+  section {
+    width: 100%;
+  }
 }
