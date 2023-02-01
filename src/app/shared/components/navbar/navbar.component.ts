@@ -17,8 +17,6 @@ export class NavbarComponent {
 
   public activatedRoute: string = this.router.url;
 
-
-
   isAuthenticated(): boolean {
     this.authService.checkAutentication().subscribe(response => {
       this.isLogged = response;

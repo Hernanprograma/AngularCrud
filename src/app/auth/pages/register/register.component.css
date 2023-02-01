@@ -5,6 +5,12 @@
   border-radius: 10px;
   margin: 20px auto;
 }
+@media screen and (max-width: 767px) {
+  .card {
+    width: 80%;
+    margin: 20px auto;
+  }
+}
 
 h2 {
   text-align: center;
