@@ -4,6 +4,7 @@ import { LoginInterface } from '../../interfaces/auth.interfaces';
 import { AuthService } from '../../services/auth.service';
 import { FormControl, FormGroup, Validators, FormBuilder, AbstractControlOptions } from '@angular/forms';
 
+
 @Component({
   selector: 'auth-login',
   templateUrl: './login.component.html',
@@ -12,6 +13,7 @@ import { FormControl, FormGroup, Validators, FormBuilder, AbstractControlOptions
 export class LoginComponent implements OnInit {
 
   public login?: LoginInterface;
+  public errorMessagge: string = ''
 
   loginForm = new FormGroup({
     email: new FormControl(''),
@@ -34,31 +36,33 @@ export class LoginComponent implements OnInit {
 
   get email() { return this.loginForm.get('email'); }
   get password() { return this.loginForm.get('password'); }
-
   get formValue() {
     return this.loginForm.value as LoginInterface;
   }
 
   onSubmit(): void {
     this.autService.login(this.formValue).subscribe(loginResponse => {
-      console.error('onSubmit');
       this.router.navigate(['/'])
+    }, error => {
+      console.error('Error', error);
+      this.errorMessagge = 'Solo puedes logearte con los usuarios permitidos. Mirea el README.md'
     })
-
   }
 
-
-
-
-
-
-
-
-
-
-
-
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

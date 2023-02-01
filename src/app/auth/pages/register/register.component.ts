@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { LoginInterface, LoginResponse } from '../../interfaces/auth.interfaces';
+import { LoginInterface } from '../../interfaces/auth.interfaces';
 import { AuthService } from '../../services/auth.service';
 import { FormControl, FormGroup, Validators, FormBuilder, AbstractControlOptions } from '@angular/forms';
 
@@ -14,6 +14,7 @@ import { FormControl, FormGroup, Validators, FormBuilder, AbstractControlOptions
 export class RegisterComponent implements OnInit {
 
   public login?: LoginInterface;
+  public errorMessagge: string = ''
 
   loginForm = new FormGroup({
     email: new FormControl(''),
@@ -36,15 +37,16 @@ export class RegisterComponent implements OnInit {
 
   get email() { return this.loginForm.get('email'); }
   get password() { return this.loginForm.get('password'); }
-
   get formValue() {
     return this.loginForm.value as LoginInterface;
   }
 
   onSubmit(): void {
-    this.autService.register(this.formValue).subscribe(loginData => {
+    this.autService.register(this.formValue).subscribe(loginResponse => {
       this.router.navigate(['/'])
-    });
-
+    }, error => {
+      console.error('Error', error);
+      this.errorMessagge = 'Solo puedes registrarte con los usuarios permitidos. Mirea el README.md'
+    })
   }
 }
