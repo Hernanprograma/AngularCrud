@@ -15,7 +15,7 @@
     <td>{{ user.email }}</td>
     <td><img src="{{ user.avatar }}" alt="" /></td>
     <td>
-      <button class="btn btn-delete">Borrar</button>
+      <button (click)="onDelete(user.id)" class="btn btn-delete">Borrar</button>
       <button [routerLink]="['/user', user.id]" class="btn btn-view">
         Ver
       </button>

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { User } from '../../interfaces/user.interface';
-import { UsersServiceService } from '../../services/users-service.service';
+import { UsersServiceService } from '../../services/users.service';
 
 @Component({
   selector: 'user-card',
@@ -17,7 +17,10 @@ export class UserCardComponent implements OnInit {
     avatar: ''
   };
   public id!: number;
-  constructor(private usersService: UsersServiceService, private route: ActivatedRoute,) {
+  constructor(
+    private usersService: UsersServiceService,
+    private route: ActivatedRoute
+  ) {
 
   }
   ngOnInit(): void {

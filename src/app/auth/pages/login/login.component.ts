@@ -1,30 +1,66 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginInterface } from '../../interfaces/auth.interfaces';
 import { AuthService } from '../../services/auth.service';
+import { FormControl, FormGroup, Validators, FormBuilder, AbstractControlOptions } from '@angular/forms';
 
 @Component({
   selector: 'auth-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
+
+  public login?: LoginInterface;
+
+  loginForm = new FormGroup({
+    email: new FormControl(''),
+    password: new FormControl('')
+
+  });
+
   constructor(
     private autService: AuthService,
-    private router: Router
+    private router: Router,
+    private formBuilder: FormBuilder
   ) { }
-  public login: LoginInterface = {
-    email: '',
-    password: ''
-  };
+
+  ngOnInit(): void {
+    this.loginForm = this.formBuilder.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(4)]],
+    });
+  }
+
+  get email() { return this.loginForm.get('email'); }
+  get password() { return this.loginForm.get('password'); }
+
+  get formValue() {
+    return this.loginForm.value as LoginInterface;
+  }
+
   onSubmit(): void {
-    this.autService.login(this.login).subscribe(loginResponse => {
+    this.autService.login(this.formValue).subscribe(loginResponse => {
       console.error('onSubmit');
-      console.log({ loginResponse });
       this.router.navigate(['/'])
     })
 
-
   }
 
+
+
+
+
+
+
+
+
+
+
+
 }
+
+
+
+
+

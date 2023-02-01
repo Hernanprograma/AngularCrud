@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { AuthService } from '../../../auth/services/auth.service';
 
 @Component({
@@ -8,11 +8,23 @@ import { AuthService } from '../../../auth/services/auth.service';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent {
-
+  isLogged: boolean = false;
   constructor(
     private authService: AuthService,
-    private router: Router
+    public router: Router,
+
   ) { }
+
+  public activatedRoute: string = this.router.url;
+
+
+
+  isAuthenticated(): boolean {
+    this.authService.checkAutentication().subscribe(response => {
+      this.isLogged = response;
+    })
+    return this.isLogged;
+  }
 
   onLogout() {
     this.authService.logout();

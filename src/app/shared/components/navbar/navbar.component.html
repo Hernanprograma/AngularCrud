@@ -2,9 +2,22 @@
   <nav class="navbar">
     <a href="#">Logo</a>
     <ul>
-      <li routerLink="login" routerLinkActive="active">Login</li>
-      <li routerLink="register" routerLinkActive="active">Register</li>
-      <li (click)="onLogout()">Logout</li>
+      <li
+        *ngIf="router.url === '/register'"
+        routerLink="login"
+        routerLinkActive="active"
+      >
+        Login
+      </li>
+      <li
+        *ngIf="router.url === '/login'"
+        routerLink="register"
+        routerLinkActive="active"
+      >
+        Register
+      </li>
+
+      <li *ngIf="isAuthenticated()" (click)="onLogout()">Logout</li>
     </ul>
   </nav>
 </header>

@@ -1,19 +1,33 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, CanMatch, Route, RouterStateSnapshot, UrlSegment, UrlTree } from '@angular/router';
-import { Observable } from 'rxjs';
+import { ActivatedRouteSnapshot, CanActivate, CanMatch, Route, RouterStateSnapshot, UrlSegment, UrlTree, Router } from '@angular/router';
+import { Observable, tap } from 'rxjs';
+import { AuthService } from '../services/auth.service';
 
 @Injectable({ providedIn: 'root' })
 export class AuthGuard implements CanMatch, CanActivate {
-  constructor() { }
-  canMatch(route: Route, segments: UrlSegment[]): boolean | Observable<boolean> {
-    console.log('Can Match')
-    console.log({ route, segments })
-    return false;
+
+  constructor(
+    private authService: AuthService,
+    private router: Router
+  ) { }
+
+  private checkAuthStatus(): boolean | Observable<boolean> {
+    return this.authService.checkAutentication()
+      .pipe(
+
+        tap(isAuthenticated => {
+          if (!isAuthenticated) this.router.navigate(['login'])
+        }),
+      )
   }
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean> {
-    console.log('Can Activate');
-    console.log({ route, state })
-    return false;
+
+  canMatch(route: Route, segments: UrlSegment[]): boolean | Observable<boolean> {
+    return this.checkAuthStatus();
+  }
+
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | Observable<boolean> {
+    return this.checkAuthStatus();
+
   }
 
 
