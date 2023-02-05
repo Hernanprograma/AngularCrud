@@ -45,7 +45,7 @@ export class LoginComponent implements OnInit {
       this.router.navigate(['/'])
     }, error => {
       console.error('Error', error);
-      this.errorMessagge = 'Solo puedes logearte con los usuarios permitidos. Mirea el README.md'
+      this.errorMessagge = 'Solo puedes logearte con los usuarios permitidos. Mira el README.md'
     })
   }
 

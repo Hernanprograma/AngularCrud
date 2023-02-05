@@ -46,7 +46,7 @@ export class RegisterComponent implements OnInit {
       this.router.navigate(['/'])
     }, error => {
       console.error('Error', error);
-      this.errorMessagge = 'Solo puedes registrarte con los usuarios permitidos. Mirea el README.md'
+      this.errorMessagge = 'Solo puedes registrarte con los usuarios permitidos. Mira el README.md'
     })
   }
 }

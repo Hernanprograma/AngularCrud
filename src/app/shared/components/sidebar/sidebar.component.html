@@ -1,5 +1,26 @@
-<aside class="sidebar">
-  <ul>
-    <li routerLink="/" routerLinkActive="active">Home</li>
-  </ul>
+<aside>
+  <a href="https://quasardynamics.com/"
+    ><img class="logo-img" src="assets/logo.png" alt=""
+  /></a>
+
+  <div class="sidebar">
+    <a href="#" routerLink="/" routerLinkActive="active">Home</a>
+
+    <a
+      *ngIf="router.url === '/register'"
+      routerLink="login"
+      routerLinkActive="active"
+      >Login
+    </a>
+
+    <a
+      *ngIf="router.url === '/login'"
+      routerLink="register"
+      routerLinkActive="active"
+    >
+      Register
+    </a>
+
+    <a *ngIf="isAuthenticated()" (click)="onLogout()">Logout</a>
+  </div>
 </aside>
