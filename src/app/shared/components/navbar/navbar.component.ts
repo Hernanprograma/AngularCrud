@@ -8,25 +8,6 @@ import { AuthService } from '../../../auth/services/auth.service';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent {
-  isLogged: boolean = false;
-  constructor(
-    private authService: AuthService,
-    public router: Router,
 
-  ) { }
-
-  public activatedRoute: string = this.router.url;
-
-  isAuthenticated(): boolean {
-    this.authService.checkAutentication().subscribe(response => {
-      this.isLogged = response;
-    })
-    return this.isLogged;
-  }
-
-  onLogout() {
-    this.authService.logout();
-    this.router.navigate(['login']);
-  }
 
 }

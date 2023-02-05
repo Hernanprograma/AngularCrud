@@ -1,8 +1,4 @@
 <aside>
-  <a href="https://quasardynamics.com/"
-    ><img class="logo-img" src="assets/logo.png" alt=""
-  /></a>
-
   <div class="sidebar">
     <a href="#" routerLink="/" routerLinkActive="active">Home</a>
 
@@ -22,5 +18,9 @@
     </a>
 
     <a *ngIf="isAuthenticated()" (click)="onLogout()">Logout</a>
+
+    <a href="https://quasardynamics.com/"
+      ><img class="logo-img" src="assets/logo.png" alt=""
+    /></a>
   </div>
 </aside>
